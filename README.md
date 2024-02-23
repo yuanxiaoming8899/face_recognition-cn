@@ -1,318 +1,391 @@
-# Face Recognition
+<div class="Box-sc-g0xbh4-0 bJMeLZ js-snippet-clipboard-copy-unpositioned" data-hpc="true"><article class="markdown-body entry-content container-lg" itemprop="text"><h1 tabindex="-1" dir="auto"><a id="user-content-face-recognition" class="anchor" aria-hidden="true" tabindex="-1" href="#face-recognition"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">人脸识别</font></font></h1>
+<p dir="auto"><em><font style="vertical-align: inherit;"></font><a href="https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您还可以阅读此文件的中文简体中文版</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">、</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/README_Korean.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">韩语한국어</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或</font></font><a href="https://github.com/m-i-k-i/face_recognition/blob/master/README_Japanese.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">日语日本语</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的翻译版本</font><font style="vertical-align: inherit;">。</font></font></em></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用世界上最简单的人脸识别库，通过 Python 或命令行识别和操作人脸。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用</font></font><a href="http://dlib.net/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">dlib</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过深度学习构建的最先进的人脸识别功能构建。</font></font><a href="http://vis-www.cs.umass.edu/lfw/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该模型在Labeled Faces in the Wild</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">基准测试中的准确率为 99.38%
+ </font><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">它还提供了一个简单的</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行工具，可让您从命令行对图像文件夹进行人脸识别！</font></font></p>
+<p dir="auto"><a href="https://pypi.python.org/pypi/face_recognition" rel="nofollow"><img src="https://camo.githubusercontent.com/3450e9fa44cb53b90855ff92a55df256fa0236c7725c96f9aeae3f050c5c38b5/68747470733a2f2f696d672e736869656c64732e696f2f707970692f762f666163655f7265636f676e6974696f6e2e737667" alt="皮伊" data-canonical-src="https://img.shields.io/pypi/v/face_recognition.svg" style="max-width: 100%;"></a>
+<a href="https://github.com/ageitgey/face_recognition/actions?query=workflow%3ACI"><img src="https://github.com/ageitgey/face_recognition/workflows/CI/badge.svg?branch=master&amp;event=push" alt="构建状态" style="max-width: 100%;"></a>
+<a href="http://face-recognition.readthedocs.io/en/latest/?badge=latest" rel="nofollow"><img src="https://camo.githubusercontent.com/9d9c5fc9b61c6c3632cbd64ebcd56bce0157fb06ab06f59f005ea30f25971f8c/68747470733a2f2f72656164746865646f63732e6f72672f70726f6a656374732f666163652d7265636f676e6974696f6e2f62616467652f3f76657273696f6e3d6c6174657374" alt="文件状态" data-canonical-src="https://readthedocs.org/projects/face-recognition/badge/?version=latest" style="max-width: 100%;"></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-features" class="anchor" aria-hidden="true" tabindex="-1" href="#features"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">特征</font></font></h2>
+<h4 tabindex="-1" dir="auto"><a id="user-content-find-faces-in-pictures" class="anchor" aria-hidden="true" tabindex="-1" href="#find-faces-in-pictures"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查找图片中的面孔</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">找出图片中出现的所有面孔：</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png"><img src="https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png" alt="" style="max-width: 100%;"></a></p>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
+<span class="pl-s1">image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"your_file.jpg"</span>)
+<span class="pl-s1">face_locations</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_locations</span>(<span class="pl-s1">image</span>)</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
+image = face_recognition.load_image_file(&quot;your_file.jpg&quot;)
+face_locations = face_recognition.face_locations(image)" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<h4 tabindex="-1" dir="auto"><a id="user-content-find-and-manipulate-facial-features-in-pictures" class="anchor" aria-hidden="true" tabindex="-1" href="#find-and-manipulate-facial-features-in-pictures"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查找并操作图片中的面部特征</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">获取每个人的眼睛、鼻子、嘴巴和下巴的位置和轮廓。</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png"><img src="https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png" alt="" style="max-width: 100%;"></a></p>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
+<span class="pl-s1">image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"your_file.jpg"</span>)
+<span class="pl-s1">face_landmarks_list</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_landmarks</span>(<span class="pl-s1">image</span>)</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
+image = face_recognition.load_image_file(&quot;your_file.jpg&quot;)
+face_landmarks_list = face_recognition.face_landmarks(image)" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">寻找面部特征对于很多重要的事情都非常有用。</font><font style="vertical-align: inherit;">但你也可以用它来做一些非常愚蠢的事情，比如应用</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">数字化妆</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（想想“美图”）：</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png"><img src="https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png" alt="" style="max-width: 100%;"></a></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-identify-faces-in-pictures" class="anchor" aria-hidden="true" tabindex="-1" href="#identify-faces-in-pictures"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">识别图片中的面孔</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">识别每张照片中出现的人。</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png"><img src="https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png" alt="" style="max-width: 100%;"></a></p>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
+<span class="pl-s1">known_image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"biden.jpg"</span>)
+<span class="pl-s1">unknown_image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"unknown.jpg"</span>)
 
-_You can also read a translated version of this file [in Chinese 简体中文版](https://github.com/ageitgey/face_recognition/blob/master/README_Simplified_Chinese.md) or [in Korean 한국어](https://github.com/ageitgey/face_recognition/blob/master/README_Korean.md) or [in Japanese 日本語](https://github.com/m-i-k-i/face_recognition/blob/master/README_Japanese.md)._
+<span class="pl-s1">biden_encoding</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_encodings</span>(<span class="pl-s1">known_image</span>)[<span class="pl-c1">0</span>]
+<span class="pl-s1">unknown_encoding</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_encodings</span>(<span class="pl-s1">unknown_image</span>)[<span class="pl-c1">0</span>]
 
-Recognize and manipulate faces from Python or from the command line with
-the world's simplest face recognition library.
-
-Built using [dlib](http://dlib.net/)'s state-of-the-art face recognition
-built with deep learning. The model has an accuracy of 99.38% on the
-[Labeled Faces in the Wild](http://vis-www.cs.umass.edu/lfw/) benchmark.
-
-This also provides a simple `face_recognition` command line tool that lets
-you do face recognition on a folder of images from the command line!
-
-
-[![PyPI](https://img.shields.io/pypi/v/face_recognition.svg)](https://pypi.python.org/pypi/face_recognition)
-[![Build Status](https://github.com/ageitgey/face_recognition/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/ageitgey/face_recognition/actions?query=workflow%3ACI)
-[![Documentation Status](https://readthedocs.org/projects/face-recognition/badge/?version=latest)](http://face-recognition.readthedocs.io/en/latest/?badge=latest)
-
-## Features
-
-#### Find faces in pictures
-
-Find all the faces that appear in a picture:
-
-![](https://cloud.githubusercontent.com/assets/896692/23625227/42c65360-025d-11e7-94ea-b12f28cb34b4.png)
-
-```python
-import face_recognition
-image = face_recognition.load_image_file("your_file.jpg")
-face_locations = face_recognition.face_locations(image)
-```
-
-#### Find and manipulate facial features in pictures
-
-Get the locations and outlines of each person's eyes, nose, mouth and chin.
-
-![](https://cloud.githubusercontent.com/assets/896692/23625282/7f2d79dc-025d-11e7-8728-d8924596f8fa.png)
-
-```python
-import face_recognition
-image = face_recognition.load_image_file("your_file.jpg")
-face_landmarks_list = face_recognition.face_landmarks(image)
-```
-
-Finding facial features is super useful for lots of important stuff. But you can also use it for really stupid stuff
-like applying [digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py) (think 'Meitu'):
-
-![](https://cloud.githubusercontent.com/assets/896692/23625283/80638760-025d-11e7-80a2-1d2779f7ccab.png)
-
-#### Identify faces in pictures
-
-Recognize who appears in each photo.
-
-![](https://cloud.githubusercontent.com/assets/896692/23625229/45e049b6-025d-11e7-89cc-8a71cf89e713.png)
-
-```python
-import face_recognition
-known_image = face_recognition.load_image_file("biden.jpg")
-unknown_image = face_recognition.load_image_file("unknown.jpg")
+<span class="pl-s1">results</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">compare_faces</span>([<span class="pl-s1">biden_encoding</span>], <span class="pl-s1">unknown_encoding</span>)</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
+known_image = face_recognition.load_image_file(&quot;biden.jpg&quot;)
+unknown_image = face_recognition.load_image_file(&quot;unknown.jpg&quot;)
 
 biden_encoding = face_recognition.face_encodings(known_image)[0]
 unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
 
-results = face_recognition.compare_faces([biden_encoding], unknown_encoding)
-```
-
-You can even use this library with other Python libraries to do real-time face recognition:
-
-![](https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif)
-
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py) for the code.
-
-## Online Demos
-
-User-contributed shared Jupyter notebook demo (not officially supported): [![Deepnote](https://beta.deepnote.org/buttons/try-in-a-jupyter-notebook.svg)](https://beta.deepnote.org/launch?template=face_recognition)
-
-## Installation
-
-### Requirements
-
-  * Python 3.3+ or Python 2.7
-  * macOS or Linux (Windows not officially supported, but might work)
-
-### Installation Options:
-
-#### Installing on Mac or Linux
-
-First, make sure you have dlib already installed with Python bindings:
-
-  * [How to install dlib from source on macOS or Ubuntu](https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf)
-  
-Then, make sure you have cmake installed:  
- 
-```brew install cmake```
-
-Finally, install this module from pypi using `pip3` (or `pip2` for Python 2):
-
-```bash
-pip3 install face_recognition
-```
-
-Alternatively, you can try this library with [Docker](https://www.docker.com/), see [this section](#deployment).
-
-If you are having trouble with installation, you can also try out a
-[pre-configured VM](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b).
-
-#### Installing on an Nvidia Jetson Nano board
-
- * [Jetson Nano installation instructions](https://medium.com/@ageitgey/build-a-hardware-based-face-recognition-system-for-150-with-the-nvidia-jetson-nano-and-python-a25cb8c891fd)
-   * Please follow the instructions in the article carefully. There is current a bug in the CUDA libraries on the Jetson Nano that will cause this library to fail silently if you don't follow the instructions in the article to comment out a line in dlib and recompile it.
-
-#### Installing on Raspberry Pi 2+
-
-  * [Raspberry Pi 2+ installation instructions](https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65)
-
-#### Installing on FreeBSD
-
-```bash
-pkg install graphics/py-face_recognition
-```
-
-#### Installing on Windows
-
-While Windows isn't officially supported, helpful users have posted instructions on how to install this library:
-
-  * [@masoudr's Windows 10 installation guide (dlib + face_recognition)](https://github.com/ageitgey/face_recognition/issues/175#issue-257710508)
-
-#### Installing a pre-configured Virtual Machine image
-
-  * [Download the pre-configured VM image](https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b) (for VMware Player or VirtualBox).
-
-## Usage
-
-### Command-Line Interface
-
-When you install `face_recognition`, you get two simple command-line 
-programs:
-
-* `face_recognition` - Recognize faces in a photograph or folder full for 
-   photographs.
-* `face_detection` - Find faces in a photograph or folder full for photographs.
-
-#### `face_recognition` command line tool
-
-The `face_recognition` command lets you recognize faces in a photograph or 
-folder full  for photographs.
-
-First, you need to provide a folder with one picture of each person you
-already know. There should be one image file for each person with the
-files named according to who is in the picture:
-
-![known](https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png)
-
-Next, you need a second folder with the files you want to identify:
-
-![unknown](https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png)
-
-Then in you simply run the command `face_recognition`, passing in
-the folder of known people and the folder (or single image) with unknown
-people and it tells you who is in each image:
-
-```bash
-$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/
+results = face_recognition.compare_faces([biden_encoding], unknown_encoding)" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您甚至可以将此库与其他 Python 库一起使用来进行实时人脸识别：</font></font></p>
+<p dir="auto"><animated-image data-catalyst=""><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" data-target="animated-image.originalLink"><img src="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" alt="" style="max-width: 100%; display: inline-block;" data-target="animated-image.originalImage"></a>
+      <span class="AnimatedImagePlayer" data-target="animated-image.player" hidden="">
+        <a data-target="animated-image.replacedLink" class="AnimatedImagePlayer-images" href="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" target="_blank">
+          
+        <span data-target="animated-image.imageContainer">
+            <img data-target="animated-image.replacedImage" alt="36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" class="AnimatedImagePlayer-animatedImage" src="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" style="display: block; opacity: 1;">
+          <canvas class="AnimatedImagePlayer-stillImage" aria-hidden="true" width="800" height="446"></canvas></span></a>
+        <button data-target="animated-image.imageButton" class="AnimatedImagePlayer-images" tabindex="-1" aria-label="Play 36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" hidden=""></button>
+        <span class="AnimatedImagePlayer-controls" data-target="animated-image.controls" hidden="">
+          <button data-target="animated-image.playButton" class="AnimatedImagePlayer-button" aria-label="Play 36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif">
+            <svg aria-hidden="true" focusable="false" class="octicon icon-play" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 13.5427V2.45734C4 1.82607 4.69692 1.4435 5.2295 1.78241L13.9394 7.32507C14.4334 7.63943 14.4334 8.36057 13.9394 8.67493L5.2295 14.2176C4.69692 14.5565 4 14.1739 4 13.5427Z">
+            </path></svg>
+            <svg aria-hidden="true" focusable="false" class="octicon icon-pause" width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="2" width="3" height="12" rx="1"></rect>
+              <rect x="9" y="2" width="3" height="12" rx="1"></rect>
+            </svg>
+          </button>
+          <a data-target="animated-image.openButton" aria-label="在新窗口中打开" class="AnimatedImagePlayer-button" href="https://cloud.githubusercontent.com/assets/896692/24430398/36f0e3f0-13cb-11e7-8258-4d0c9ce1e419.gif" target="_blank">
+            <svg aria-hidden="true" class="octicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+              <path fill-rule="evenodd" d="M10.604 1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.75.75 0 01-1.06-1.06l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1zM3.75 2A1.75 1.75 0 002 3.75v8.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 12.25v-3.5a.75.75 0 00-1.5 0v3.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-8.5a.25.25 0 01.25-.25h3.5a.75.75 0 000-1.5h-3.5z"></path>
+            </svg>
+          </a>
+        </span>
+      </span></animated-image></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">的代码。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-online-demos" class="anchor" aria-hidden="true" tabindex="-1" href="#online-demos"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在线演示</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用户贡献的共享 Jupyter Notebook 演示（未正式支持）：</font></font><a href="https://beta.deepnote.org/launch?template=face_recognition" rel="nofollow"><img src="https://camo.githubusercontent.com/6969730fc7e3e51cb556fa3e062ea02b63e44cd729ff831aee82700a6aa01baf/68747470733a2f2f626574612e646565706e6f74652e6f72672f627574746f6e732f7472792d696e2d612d6a7570797465722d6e6f7465626f6f6b2e737667" alt="深记" data-canonical-src="https://beta.deepnote.org/buttons/try-in-a-jupyter-notebook.svg" style="max-width: 100%;"></a></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-installation" class="anchor" aria-hidden="true" tabindex="-1" href="#installation"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装</font></font></h2>
+<h3 tabindex="-1" dir="auto"><a id="user-content-requirements" class="anchor" aria-hidden="true" tabindex="-1" href="#requirements"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要求</font></font></h3>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python 3.3+ 或 Python 2.7</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">macOS 或 Linux（Windows 未得到官方支持，但可能可以）</font></font></li>
+</ul>
+<h3 tabindex="-1" dir="auto"><a id="user-content-installation-options" class="anchor" aria-hidden="true" tabindex="-1" href="#installation-options"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装选项：</font></font></h3>
+<h4 tabindex="-1" dir="auto"><a id="user-content-installing-on-mac-or-linux" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-on-mac-or-linux"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Mac 或 Linux 上安装</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">首先，确保您已经安装了 dlib 和 Python 绑定：</font></font></p>
+<ul dir="auto">
+<li><a href="https://gist.github.com/ageitgey/629d75c1baac34dfa5ca2a1928a7aeaf"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如何在 macOS 或 Ubuntu 上从源代码安装 dlib</font></font></a></li>
+</ul>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">然后，确保您已安装 cmake：</font></font></p>
+<p dir="auto"><code>brew install cmake</code></p>
+<p dir="auto"><font style="vertical-align: inherit;"></font><code>pip3</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">最后，使用（或</font></font><code>pip2</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">对于 Python 2）</font><font style="vertical-align: inherit;">从 pypi 安装此模块：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>pip3 install face_recognition</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="pip3 install face_recognition" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">或者，您可以使用</font></font><a href="https://www.docker.com/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">尝试此库，请参阅</font></font><a href="#deployment"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">本节</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您在安装时遇到问题，还可以尝试
+</font></font><a href="https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">预配置的虚拟机</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-installing-on-an-nvidia-jetson-nano-board" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-on-an-nvidia-jetson-nano-board"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Nvidia Jetson Nano 板上安装</font></font></h4>
+<ul dir="auto">
+<li><a href="https://medium.com/@ageitgey/build-a-hardware-based-face-recognition-system-for-150-with-the-nvidia-jetson-nano-and-python-a25cb8c891fd" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Jetson Nano 安装说明</font></font></a>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请仔细按照文章中的说明进行操作。</font><font style="vertical-align: inherit;">Jetson Nano 上的 CUDA 库当前存在一个错误，如果您不按照本文中的说明注释掉 dlib 中的一行并重新编译，该错误将导致该库无提示地失败。</font></font></li>
+</ul>
+</li>
+</ul>
+<h4 tabindex="-1" dir="auto"><a id="user-content-installing-on-raspberry-pi-2" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-on-raspberry-pi-2"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Raspberry Pi 2+ 上安装</font></font></h4>
+<ul dir="auto">
+<li><a href="https://gist.github.com/ageitgey/1ac8dbe8572f3f533df6269dab35df65"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">树莓派2+安装说明</font></font></a></li>
+</ul>
+<h4 tabindex="-1" dir="auto"><a id="user-content-installing-on-freebsd" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-on-freebsd"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 FreeBSD 上安装</font></font></h4>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>pkg install graphics/py-face_recognition</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="pkg install graphics/py-face_recognition" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<h4 tabindex="-1" dir="auto"><a id="user-content-installing-on-windows" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-on-windows"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 Windows 上安装</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">虽然 Windows 不受官方支持，但有用的用户已经发布了有关如何安装此库的说明：</font></font></p>
+<ul dir="auto">
+<li><a href="https://github.com/ageitgey/face_recognition/issues/175#issue-257710508" data-hovercard-type="issue" data-hovercard-url="/ageitgey/face_recognition/issues/175/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@masoudr 的 Windows 10 安装指南（dlib + Face_recognition）</font></font></a></li>
+</ul>
+<h4 tabindex="-1" dir="auto"><a id="user-content-installing-a-pre-configured-virtual-machine-image" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-a-pre-configured-virtual-machine-image"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">安装预配置的虚拟机映像</font></font></h4>
+<ul dir="auto">
+<li><a href="https://medium.com/@ageitgey/try-deep-learning-in-python-now-with-a-fully-pre-configured-vm-1d97d4c3e9b" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">下载预配置的虚拟机映像</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">（适用于 VMware Player 或 VirtualBox）。</font></font></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-usage" class="anchor" aria-hidden="true" tabindex="-1" href="#usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用法</font></font></h2>
+<h3 tabindex="-1" dir="auto"><a id="user-content-command-line-interface" class="anchor" aria-hidden="true" tabindex="-1" href="#command-line-interface"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行界面</font></font></h3>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">当您安装时</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，您会得到两个简单的命令行程序：</font></font></p>
+<ul dir="auto">
+<li><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- 识别照片或装满照片的文件夹中的面孔。</font></font></li>
+<li><code>face_detection</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">- 在照片或装满照片的文件夹中查找面孔。</font></font></li>
+</ul>
+<h4 tabindex="-1" dir="auto"><a id="user-content-face_recognition-command-line-tool" class="anchor" aria-hidden="true" tabindex="-1" href="#face_recognition-command-line-tool"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行工具</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令可让您识别照片或装满照片的文件夹中的面孔。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">首先，您需要提供一个文件夹，其中包含您已经认识的每个人的一张照片。</font><font style="vertical-align: inherit;">每个人应该有一个图像文件，文件根据图片中的人物命名：</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png"><img src="https://cloud.githubusercontent.com/assets/896692/23582466/8324810e-00df-11e7-82cf-41515eba704d.png" alt="已知的" style="max-width: 100%;"></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">接下来，您需要第二个文件夹，其中包含要识别的文件：</font></font></p>
+<p dir="auto"><a target="_blank" rel="noopener noreferrer nofollow" href="https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png"><img src="https://cloud.githubusercontent.com/assets/896692/23582465/81f422f8-00df-11e7-8b0d-75364f641f58.png" alt="未知" style="max-width: 100%;"></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">然后，您只需运行命令</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，传入已知人员的文件夹和未知人员的文件夹（或单个图像），它就会告诉您每个图像中都有谁：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/
 
 /unknown_pictures/unknown.jpg,Barack Obama
-/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
-```
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/
 
-There's one line in the output for each face. The data is comma-separated
-with the filename and the name of the person found.
-
-An `unknown_person` is a face in the image that didn't match anyone in
-your folder of known people.
-
-#### `face_detection` command line tool
-
-The `face_detection` command lets you find the location (pixel coordinatates) 
-of any faces in an image.
-
-Just run the command `face_detection`, passing in a folder of images 
-to check (or a single image):
-
-```bash
-$ face_detection  ./folder_with_pictures/
+/unknown_pictures/unknown.jpg,Barack Obama
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每张脸的输出中都有一行。</font><font style="vertical-align: inherit;">数据与文件名和找到的人的姓名以逗号分隔。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">An</font></font><code>unknown_person</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是图像中与您的已知人物文件夹中的任何人都不匹配的面孔。</font></font></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-face_detection-command-line-tool" class="anchor" aria-hidden="true" tabindex="-1" href="#face_detection-command-line-tool"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><code>face_detection</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令行工具</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">该</font></font><code>face_detection</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">命令可让您找到图像中任何人脸的位置（像素坐标）。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">只需运行命令</font></font><code>face_detection</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，传入要检查的图像文件夹（或单个图像）：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>$ face_detection  ./folder_with_pictures/
 
 examples/image1.jpg,65,215,169,112
 examples/image2.jpg,62,394,211,244
-examples/image2.jpg,95,941,244,792
-```
+examples/image2.jpg,95,941,244,792</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ face_detection  ./folder_with_pictures/
 
-It prints one line for each face that was detected. The coordinates
-reported are the top, right, bottom and left coordinates of the face (in pixels).
- 
-##### Adjusting Tolerance / Sensitivity
-
-If you are getting multiple matches for the same person, it might be that
-the people in your photos look very similar and a lower tolerance value
-is needed to make face comparisons more strict.
-
-You can do that with the `--tolerance` parameter. The default tolerance
-value is 0.6 and lower numbers make face comparisons more strict:
-
-```bash
-$ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictures/
+examples/image1.jpg,65,215,169,112
+examples/image2.jpg,62,394,211,244
+examples/image2.jpg,95,941,244,792" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">它为检测到的每张脸打印一行。</font><font style="vertical-align: inherit;">报告的坐标是面部的顶部、右侧、底部和左侧坐标（以像素为单位）。</font></font></p>
+<h5 tabindex="-1" dir="auto"><a id="user-content-adjusting-tolerance--sensitivity" class="anchor" aria-hidden="true" tabindex="-1" href="#adjusting-tolerance--sensitivity"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">调整容差/灵敏度</font></font></h5>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您获得同一个人的多个匹配项，则可能是照片中的人看起来非常相似，并且需要较低的容差值以使面部比较更加严格。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以使用</font></font><code>--tolerance</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参数来做到这一点。</font><font style="vertical-align: inherit;">默认容差值为 0.6，较低的数字使面部比较更加严格：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>$ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictures/
 
 /unknown_pictures/unknown.jpg,Barack Obama
-/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person
-```
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ face_recognition --tolerance 0.54 ./pictures_of_people_i_know/ ./unknown_pictures/
 
-If you want to see the face distance calculated for each match in order
-to adjust the tolerance setting, you can use `--show-distance true`:
-
-```bash
-$ face_recognition --show-distance true ./pictures_of_people_i_know/ ./unknown_pictures/
+/unknown_pictures/unknown.jpg,Barack Obama
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想查看为每个匹配计算的面部距离以调整容差设置，您可以使用</font></font><code>--show-distance true</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>$ face_recognition --show-distance <span class="pl-c1">true</span> ./pictures_of_people_i_know/ ./unknown_pictures/
 
 /unknown_pictures/unknown.jpg,Barack Obama,0.378542298956785
-/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None
-```
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ face_recognition --show-distance true ./pictures_of_people_i_know/ ./unknown_pictures/
 
-##### More Examples
-
-If you simply want to know the names of the people in each photograph but don't
-care about file names, you could do this:
-
-```bash
-$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/ | cut -d ',' -f2
+/unknown_pictures/unknown.jpg,Barack Obama,0.378542298956785
+/face_recognition_test/unknown_pictures/unknown.jpg,unknown_person,None" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<h5 tabindex="-1" dir="auto"><a id="user-content-more-examples" class="anchor" aria-hidden="true" tabindex="-1" href="#more-examples"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">更多示例</font></font></h5>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您只想知道每张照片中人物的姓名而不关心文件名，您可以这样做：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/ <span class="pl-k">|</span> cut -d <span class="pl-s"><span class="pl-pds">'</span>,<span class="pl-pds">'</span></span> -f2
 
 Barack Obama
-unknown_person
-```
+unknown_person</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ face_recognition ./pictures_of_people_i_know/ ./unknown_pictures/ | cut -d ',' -f2
 
-##### Speeding up Face Recognition
+Barack Obama
+unknown_person" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<h5 tabindex="-1" dir="auto"><a id="user-content-speeding-up-face-recognition" class="anchor" aria-hidden="true" tabindex="-1" href="#speeding-up-face-recognition"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">加快人脸识别速度</font></font></h5>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您有一台具有多个 CPU 核心的计算机，则可以并行完成人脸识别。</font><font style="vertical-align: inherit;">例如，如果您的系统有 4 个 CPU 核心，则通过并行使用所有 CPU 核心，您可以在相同的时间内处理大约 4 倍数量的图像。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您使用的是 Python 3.4 或更高版本，请传入</font></font><code>--cpus &lt;number_of_cpu_cores_to_use&gt;</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">参数：</font></font></p>
+<div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>$ face_recognition --cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="$ face_recognition --cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您还可以传入</font></font><code>--cpus -1</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">以使用系统中的所有 CPU 核心。</font></font></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-python-module" class="anchor" aria-hidden="true" tabindex="-1" href="#python-module"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python模块</font></font></h4>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以导入该</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">模块，然后只需几行代码即可轻松操作面部。</font><font style="vertical-align: inherit;">这非常简单！</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">API 文档： https: </font></font><a href="https://face-recognition.readthedocs.io/en/latest/face_recognition.html" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">//face-recognition.readthedocs.io</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h5 tabindex="-1" dir="auto"><a id="user-content-automatically-find-all-the-faces-in-an-image" class="anchor" aria-hidden="true" tabindex="-1" href="#automatically-find-all-the-faces-in-an-image"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">自动查找图像中的所有面孔</font></font></h5>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
 
-Face recognition can be done in parallel if you have a computer with
-multiple CPU cores. For example, if your system has 4 CPU cores, you can
-process about 4 times as many images in the same amount of time by using
-all your CPU cores in parallel.
+<span class="pl-s1">image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"my_picture.jpg"</span>)
+<span class="pl-s1">face_locations</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_locations</span>(<span class="pl-s1">image</span>)
 
-If you are using Python 3.4 or newer, pass in a `--cpus <number_of_cpu_cores_to_use>` parameter:
+<span class="pl-c"># face_locations is now an array listing the co-ordinates of each face!</span></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
 
-```bash
-$ face_recognition --cpus 4 ./pictures_of_people_i_know/ ./unknown_pictures/
-```
-
-You can also pass in `--cpus -1` to use all CPU cores in your system.
-
-#### Python Module
-
-You can import the `face_recognition` module and then easily manipulate
-faces with just a couple of lines of code. It's super easy!
-
-API Docs: [https://face-recognition.readthedocs.io](https://face-recognition.readthedocs.io/en/latest/face_recognition.html).
-
-##### Automatically find all the faces in an image
-
-```python
-import face_recognition
-
-image = face_recognition.load_image_file("my_picture.jpg")
+image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
 face_locations = face_recognition.face_locations(image)
 
-# face_locations is now an array listing the co-ordinates of each face!
-```
+# face_locations is now an array listing the co-ordinates of each face!" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+来尝试一下。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您还可以选择更准确的基于深度学习的人脸检测模型。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注意：该模型需要 GPU 加速（通过 NVidia 的 CUDA 库）才能获得良好的性能。</font><font style="vertical-align: inherit;">您还需要在编译</font></font><code>dlib</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
 
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
- to try it out.
+<span class="pl-s1">image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"my_picture.jpg"</span>)
+<span class="pl-s1">face_locations</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_locations</span>(<span class="pl-s1">image</span>, <span class="pl-s1">model</span><span class="pl-c1">=</span><span class="pl-s">"cnn"</span>)
 
-You can also opt-in to a somewhat more accurate deep-learning-based face detection model.
+<span class="pl-c"># face_locations is now an array listing the co-ordinates of each face!</span></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
 
-Note: GPU acceleration (via NVidia's CUDA library) is required for good
-performance with this model. You'll also want to enable CUDA support
-when compliling `dlib`.
+image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
+face_locations = face_recognition.face_locations(image, model=&quot;cnn&quot;)
 
-```python
-import face_recognition
+# face_locations is now an array listing the co-ordinates of each face!" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+来尝试一下。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果你有很多图片并且有GPU，你也可以
+</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">批量找人脸</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h5 tabindex="-1" dir="auto"><a id="user-content-automatically-locate-the-facial-features-of-a-person-in-an-image" class="anchor" aria-hidden="true" tabindex="-1" href="#automatically-locate-the-facial-features-of-a-person-in-an-image"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">自动定位图像中人物的面部特征</font></font></h5>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
 
-image = face_recognition.load_image_file("my_picture.jpg")
-face_locations = face_recognition.face_locations(image, model="cnn")
+<span class="pl-s1">image</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"my_picture.jpg"</span>)
+<span class="pl-s1">face_landmarks_list</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_landmarks</span>(<span class="pl-s1">image</span>)
 
-# face_locations is now an array listing the co-ordinates of each face!
-```
+<span class="pl-c"># face_landmarks_list is now an array with the locations of each facial feature in each face.</span>
+<span class="pl-c"># face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye.</span></pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
 
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py)
- to try it out.
-
-If you have a lot of images and a GPU, you can also
-[find faces in batches](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py).
-
-##### Automatically locate the facial features of a person in an image
-
-```python
-import face_recognition
-
-image = face_recognition.load_image_file("my_picture.jpg")
+image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
 face_landmarks_list = face_recognition.face_landmarks(image)
 
 # face_landmarks_list is now an array with the locations of each facial feature in each face.
-# face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye.
-```
+# face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye." tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+来尝试一下。</font></font></p>
+<h5 tabindex="-1" dir="auto"><a id="user-content-recognize-faces-in-images-and-identify-who-they-are" class="anchor" aria-hidden="true" tabindex="-1" href="#recognize-faces-in-images-and-identify-who-they-are"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">识别图像中的面孔并确定他们是谁</font></font></h5>
+<div class="highlight highlight-source-python notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">import</span> <span class="pl-s1">face_recognition</span>
 
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
- to try it out.
+<span class="pl-s1">picture_of_me</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"me.jpg"</span>)
+<span class="pl-s1">my_face_encoding</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_encodings</span>(<span class="pl-s1">picture_of_me</span>)[<span class="pl-c1">0</span>]
 
-##### Recognize faces in images and identify who they are
+<span class="pl-c"># my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face!</span>
 
-```python
-import face_recognition
+<span class="pl-s1">unknown_picture</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">load_image_file</span>(<span class="pl-s">"unknown.jpg"</span>)
+<span class="pl-s1">unknown_face_encoding</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_encodings</span>(<span class="pl-s1">unknown_picture</span>)[<span class="pl-c1">0</span>]
 
-picture_of_me = face_recognition.load_image_file("me.jpg")
+<span class="pl-c"># Now we can see the two face encodings are of the same person with `compare_faces`!</span>
+
+<span class="pl-s1">results</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">compare_faces</span>([<span class="pl-s1">my_face_encoding</span>], <span class="pl-s1">unknown_face_encoding</span>)
+
+<span class="pl-k">if</span> <span class="pl-s1">results</span>[<span class="pl-c1">0</span>] <span class="pl-c1">==</span> <span class="pl-c1">True</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">"It's a picture of me!"</span>)
+<span class="pl-k">else</span>:
+    <span class="pl-en">print</span>(<span class="pl-s">"It's not a picture of me!"</span>)</pre><div class="zeroclipboard-container">
+    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
+
+picture_of_me = face_recognition.load_image_file(&quot;me.jpg&quot;)
 my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
 
 # my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face!
 
-unknown_picture = face_recognition.load_image_file("unknown.jpg")
+unknown_picture = face_recognition.load_image_file(&quot;unknown.jpg&quot;)
 unknown_face_encoding = face_recognition.face_encodings(unknown_picture)[0]
 
 # Now we can see the two face encodings are of the same person with `compare_faces`!
@@ -320,96 +393,92 @@ unknown_face_encoding = face_recognition.face_encodings(unknown_picture)[0]
 results = face_recognition.compare_faces([my_face_encoding], unknown_face_encoding)
 
 if results[0] == True:
-    print("It's a picture of me!")
+    print(&quot;It's a picture of me!&quot;)
 else:
-    print("It's not a picture of me!")
-```
-
-See [this example](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
- to try it out.
-
-## Python Code Examples
-
-All the examples are available [here](https://github.com/ageitgey/face_recognition/tree/master/examples).
-
-
-#### Face Detection
-
-* [Find faces in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py)
-* [Find faces in a photograph (using deep learning)](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py)
-* [Find faces in batches of images w/ GPU (using deep learning)](https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py)
-* [Blur all the faces in a live video using your webcam (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/blur_faces_on_webcam.py)
-
-#### Facial Features
-
-* [Identify specific facial features in a photograph](https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py)
-* [Apply (horribly ugly) digital make-up](https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py)
-
-#### Facial Recognition
-
-* [Find and recognize unknown faces in a photograph based on photographs of known people](https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py)
-* [Identify and draw boxes around each person in a photo](https://github.com/ageitgey/face_recognition/blob/master/examples/identify_and_draw_boxes_on_faces.py)
-* [Compare faces by numeric face distance instead of only True/False matches](https://github.com/ageitgey/face_recognition/blob/master/examples/face_distance.py)
-* [Recognize faces in live video using your webcam - Simple / Slower Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py)
-* [Recognize faces in live video using your webcam - Faster Version (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py)
-* [Recognize faces in a video file and write out new video file (Requires OpenCV to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_video_file.py)
-* [Recognize faces on a Raspberry Pi w/ camera](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py)
-* [Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
-* [Recognize faces with a K-nearest neighbors classifier](https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py)
-* [Train multiple images per person then recognize faces using a SVM](https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_svm.py)
-
-## Creating a Standalone Executable
-If you want to create a standalone executable that can run without the need to install `python` or `face_recognition`, you can use [PyInstaller](https://github.com/pyinstaller/pyinstaller). However, it requires some custom configuration to work with this library. See [this issue](https://github.com/ageitgey/face_recognition/issues/357) for how to do it.
-
-## Articles and Guides that cover `face_recognition`
-
-- My article on how Face Recognition works: [Modern Face Recognition with Deep Learning](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78)
-  - Covers the algorithms and how they generally work
-- [Face recognition with OpenCV, Python, and deep learning](https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/) by Adrian Rosebrock
-  - Covers how to use face recognition in practice
-- [Raspberry Pi Face Recognition](https://www.pyimagesearch.com/2018/06/25/raspberry-pi-face-recognition/) by Adrian Rosebrock
-  - Covers how to use this on a Raspberry Pi
-- [Face clustering with Python](https://www.pyimagesearch.com/2018/07/09/face-clustering-with-python/) by Adrian Rosebrock
-  - Covers how to automatically cluster photos based on who appears in each photo using unsupervised learning
-
-## How Face Recognition Works
-
-If you want to learn how face location and recognition work instead of
-depending on a black box library, [read my article](https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78).
-
-## Caveats
-
-* The face recognition model is trained on adults and does not work very well on children. It tends to mix
-  up children quite easy using the default comparison threshold of 0.6.
-* Accuracy may vary between ethnic groups. Please see [this wiki page](https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals) for more details.
-
-## <a name="deployment">Deployment to Cloud Hosts (Heroku, AWS, etc)</a>
-
-Since `face_recognition` depends on `dlib` which is written in C++, it can be tricky to deploy an app
-using it to a cloud hosting provider like Heroku or AWS.
-
-To make things easier, there's an example Dockerfile in this repo that shows how to run an app built with
-`face_recognition` in a [Docker](https://www.docker.com/) container. With that, you should be able to deploy
-to any service that supports Docker images.
-
-You can try the Docker image locally by running: `docker-compose up --build`
-
-There are also [several prebuilt Docker images.](docker/README.md)
-
-Linux users with a GPU (drivers >= 384.81) and [Nvidia-Docker](https://github.com/NVIDIA/nvidia-docker) installed can run the example on the GPU: Open the [docker-compose.yml](docker-compose.yml) file and uncomment the `dockerfile: Dockerfile.gpu` and `runtime: nvidia` lines.
-
-## Having problems?
-
-If you run into problems, please read the [Common Errors](https://github.com/ageitgey/face_recognition/wiki/Common-Errors) section of the wiki before filing a github issue.
-
-## Thanks
-
-* Many, many thanks to [Davis King](https://github.com/davisking) ([@nulhom](https://twitter.com/nulhom))
-  for creating dlib and for providing the trained facial feature detection and face encoding models
-  used in this library. For more information on the ResNet that powers the face encodings, check out
-  his [blog post](http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html).
-* Thanks to everyone who works on all the awesome Python data science libraries like numpy, scipy, scikit-image,
-  pillow, etc, etc that makes this kind of stuff so easy and fun in Python.
-* Thanks to [Cookiecutter](https://github.com/audreyr/cookiecutter) and the
-  [audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage) project template
-  for making Python project packaging way more tolerable.
+    print(&quot;It's not a picture of me!&quot;)" tabindex="0" role="button">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
+    <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+</svg>
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-check js-clipboard-check-icon color-fg-success d-none">
+    <path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"></path>
+</svg>
+    </clipboard-copy>
+  </div></div>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此示例</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+来尝试一下。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-python-code-examples" class="anchor" aria-hidden="true" tabindex="-1" href="#python-code-examples"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Python 代码示例</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">所有示例都可以</font></font><a href="https://github.com/ageitgey/face_recognition/tree/master/examples"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在这里</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">找到。</font></font></p>
+<h4 tabindex="-1" dir="auto"><a id="user-content-face-detection" class="anchor" aria-hidden="true" tabindex="-1" href="#face-detection"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">人脸检测</font></font></h4>
+<ul dir="auto">
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查找照片中的面孔</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_picture_cnn.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查找照片中的面孔（使用深度学习）</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_faces_in_batches.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 GPU 查找批量图像中的人脸（使用深度学习）</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/blur_faces_on_webcam.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用网络摄像头模糊实时视频中的所有面孔（需要安装 OpenCV）</font></font></a></li>
+</ul>
+<h4 tabindex="-1" dir="auto"><a id="user-content-facial-features" class="anchor" aria-hidden="true" tabindex="-1" href="#facial-features"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">面部特征</font></font></h4>
+<ul dir="auto">
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/find_facial_features_in_picture.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">识别照片中的特定面部特征</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/digital_makeup.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">进行（极其丑陋的）数码化妆</font></font></a></li>
+</ul>
+<h4 tabindex="-1" dir="auto"><a id="user-content-facial-recognition" class="anchor" aria-hidden="true" tabindex="-1" href="#facial-recognition"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">面部识别</font></font></h4>
+<ul dir="auto">
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/recognize_faces_in_pictures.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">根据已知人物的照片查找并识别照片中的未知面孔</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/identify_and_draw_boxes_on_faces.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">识别照片中的每个人并在其周围画出方框</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/face_distance.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过面部数字距离来比较面部，而不仅仅是真/假匹配</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用网络摄像头识别实时视频中的人脸 - 简单/较慢版本（需要安装 OpenCV）</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_webcam_faster.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用网络摄像头识别实时视频中的人脸 - 更快版本（需要安装 OpenCV）</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_from_video_file.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">识别视频文件中的人脸并写入新的视频文件（需要安装OpenCV）</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用摄像头在 Raspberry Pi 上识别人脸</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">运行 Web 服务以通过 HTTP 识别人脸（需要安装 Flask）</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_knn.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 K 最近邻分类器识别人脸</font></font></a></li>
+<li><a href="https://github.com/ageitgey/face_recognition/blob/master/examples/face_recognition_svm.py"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">每个人训练多个图像，然后使用 SVM 识别人脸</font></font></a></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-creating-a-standalone-executable" class="anchor" aria-hidden="true" tabindex="-1" href="#creating-a-standalone-executable"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建独立的可执行文件</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想创建一个无需安装即可运行的独立可执行文件</font></font><code>python</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">，</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以使用</font></font><a href="https://github.com/pyinstaller/pyinstaller"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">PyInstaller</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font><font style="vertical-align: inherit;">但是，它需要一些自定义配置才能使用该库。</font><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/issues/357" data-hovercard-type="issue" data-hovercard-url="/ageitgey/face_recognition/issues/357/hovercard"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此问题</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">了解如何执行此操作。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-articles-and-guides-that-cover-face_recognition" class="anchor" aria-hidden="true" tabindex="-1" href="#articles-and-guides-that-cover-face_recognition"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">涵盖以下内容的文章和指南</font></font><code>face_recognition</code></h2>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">我关于人脸识别如何工作的文章：</font></font><a href="https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">利用深度学习进行现代人脸识别</font></font></a>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">涵盖算法及其一般工作原理</font></font></li>
+</ul>
+</li>
+<li><a href="https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/" rel="nofollow"><font style="vertical-align: inherit;"></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Adrian Rosebrock 使用
+</font><a href="https://www.pyimagesearch.com/2018/06/18/face-recognition-with-opencv-python-and-deep-learning/" rel="nofollow"><font style="vertical-align: inherit;">OpenCV、Python 和深度学习进行人脸识别</font></a></font><ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">涵盖如何在实践中使用人脸识别</font></font></li>
+</ul>
+</li>
+<li><a href="https://www.pyimagesearch.com/2018/06/25/raspberry-pi-face-recognition/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Raspberry Pi 人脸识别 作者</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">：Adrian Rosebrock
+</font></font><ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">介绍如何在 Raspberry Pi 上使用它</font></font></li>
+</ul>
+</li>
+<li><a href="https://www.pyimagesearch.com/2018/07/09/face-clustering-with-python/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">使用 Python 进行人脸聚类，</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作者：Adrian Rosebrock
+</font></font><ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">介绍如何使用无监督学习根据每张照片中出现的人物自动对照片进行聚类</font></font></li>
+</ul>
+</li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-how-face-recognition-works" class="anchor" aria-hidden="true" tabindex="-1" href="#how-face-recognition-works"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">人脸识别的工作原理</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您想了解人脸定位和识别的工作原理而不是依赖黑盒库，</font></font><a href="https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">请阅读我的文章</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-caveats" class="anchor" aria-hidden="true" tabindex="-1" href="#caveats"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注意事项</font></font></h2>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">人脸识别模型是针对成人进行训练的，对于儿童来说效果不太好。</font><font style="vertical-align: inherit;">使用默认的比较阈值 0.6 很容易混淆子项。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">不同种族群体的准确性可能有所不同。</font><font style="vertical-align: inherit;">请参阅</font></font><a href="https://github.com/ageitgey/face_recognition/wiki/Face-Recognition-Accuracy-Problems#question-face-recognition-works-well-with-european-individuals-but-overall-accuracy-is-lower-with-asian-individuals"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此 wiki 页面</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">了解更多详细信息。</font></font></li>
+</ul>
+<h2 tabindex="-1" dir="auto"><a id="user-content-deployment-to-cloud-hosts-heroku-aws-etc" class="anchor" aria-hidden="true" tabindex="-1" href="#deployment-to-cloud-hosts-heroku-aws-etc"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><a name="user-content-deployment"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">部署到云主机（Heroku、AWS 等）</font></font></a></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">由于</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">取决于</font></font><code>dlib</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">哪个是用 C++ 编写的，因此将使用它的应用程序部署到 Heroku 或 AWS 等云托管提供商可能会很棘手。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">为了让事情变得更简单，此存储库中有一个示例 Dockerfile，它展示了如何运行
+</font></font><code>face_recognition</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在</font></font><a href="https://www.docker.com/" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Docker</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">容器中构建的应用程序。</font><font style="vertical-align: inherit;">这样，您应该能够部署到任何支持 Docker 映像的服务。</font></font></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">您可以通过运行以下命令在本地尝试 Docker 映像：</font></font><code>docker-compose up --build</code></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">还有</font></font><a href="/ageitgey/face_recognition/blob/master/docker/README.md"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">几个预构建的 Docker 镜像。</font></font></a></p>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">具有 GPU（驱动程序 &gt;= 384.81）并安装了</font></font><a href="https://github.com/NVIDIA/nvidia-docker"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nvidia-Docker 的</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Linux 用户可以在 GPU 上运行该示例：打开</font></font><a href="/ageitgey/face_recognition/blob/master/docker-compose.yml"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">docker-compose.yml</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">文件并取消注释</font></font><code>dockerfile: Dockerfile.gpu</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和</font></font><code>runtime: nvidia</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">行。</font></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-having-problems" class="anchor" aria-hidden="true" tabindex="-1" href="#having-problems"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">有问题吗？</font></font></h2>
+<p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">如果您遇到问题，请</font><font style="vertical-align: inherit;">在提交 github 问题之前阅读 wiki 的</font></font><a href="https://github.com/ageitgey/face_recognition/wiki/Common-Errors"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">常见错误部分。</font></font></a><font style="vertical-align: inherit;"></font></p>
+<h2 tabindex="-1" dir="auto"><a id="user-content-thanks" class="anchor" aria-hidden="true" tabindex="-1" href="#thanks"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">谢谢</font></font></h2>
+<ul dir="auto">
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">非常感谢</font></font><a href="https://github.com/davisking"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Davis King</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ( </font></font><a href="https://twitter.com/nulhom" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@nulhom</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"> ) 创建 dlib 并提供该库中使用的经过训练的面部特征检测和面部编码模型。</font><font style="vertical-align: inherit;">有关支持面部编码的 ResNet 的更多信息，请查看他的</font></font><a href="http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html" rel="nofollow"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">博客文章</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">感谢所有使用 Python 数据科学库（如 numpy、scipy、scikit-image、pillow 等）的人，这些库使得 Python 中的此类内容变得如此简单和有趣。</font></font></li>
+<li><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">感谢</font></font><a href="https://github.com/audreyr/cookiecutter"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Cookiecutter</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">和
+</font></font><a href="https://github.com/audreyr/cookiecutter-pypackage"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">audreyr/cookiecutter-pypackage</font></font></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">项目模板使 Python 项目打包方式更加容易接受。</font></font></li>
+</ul>
+</article></div>
