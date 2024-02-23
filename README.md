@@ -104,7 +104,7 @@
 </ul>
 <h4 tabindex="-1" dir="auto"><a id="user-content-installing-on-freebsd" class="anchor" aria-hidden="true" tabindex="-1" href="#installing-on-freebsd"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg></a><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">在 FreeBSD 上安装</font></font></h4>
 <div class="highlight highlight-source-shell notranslate position-relative overflow-auto" dir="auto"><pre>pkg install graphics/py-face_recognition</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="pkg install graphics/py-face_recognition" tabindex="0" role="button">
+   
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
     <path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
 </svg>
@@ -238,10 +238,7 @@ unknown_person</pre><div class="zeroclipboard-container">
 <span class="pl-s1">face_locations</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_locations</span>(<span class="pl-s1">image</span>)
 
 <span class="pl-c"># face_locations is now an array listing the co-ordinates of each face!</span></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
-
-image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
-face_locations = face_recognition.face_locations(image)
+  
 
 # face_locations is now an array listing the co-ordinates of each face!" tabindex="0" role="button">
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
@@ -262,7 +259,7 @@ face_locations = face_recognition.face_locations(image)
 <span class="pl-s1">face_locations</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_locations</span>(<span class="pl-s1">image</span>, <span class="pl-s1">model</span><span class="pl-c1">=</span><span class="pl-s">"cnn"</span>)
 
 <span class="pl-c"># face_locations is now an array listing the co-ordinates of each face!</span></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
+    ="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" <clipboard-copy aria-labeldata-tooltip-direction="w" value="import face_recognition
 
 image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
 face_locations = face_recognition.face_locations(image, model=&quot;cnn&quot;)
@@ -288,10 +285,7 @@ face_locations = face_recognition.face_locations(image, model=&quot;cnn&quot;)
 
 <span class="pl-c"># face_landmarks_list is now an array with the locations of each facial feature in each face.</span>
 <span class="pl-c"># face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye.</span></pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
-
-image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
-face_landmarks_list = face_recognition.face_landmarks(image)
+ 
 
 # face_landmarks_list is now an array with the locations of each facial feature in each face.
 # face_landmarks_list[0]['left_eye'] would be the location and outline of the first person's left eye." tabindex="0" role="button">
@@ -324,10 +318,7 @@ face_landmarks_list = face_recognition.face_landmarks(image)
     <span class="pl-en">print</span>(<span class="pl-s">"It's a picture of me!"</span>)
 <span class="pl-k">else</span>:
     <span class="pl-en">print</span>(<span class="pl-s">"It's not a picture of me!"</span>)</pre><div class="zeroclipboard-container">
-    <clipboard-copy aria-label="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" data-tooltip-direction="w" value="import face_recognition
-
-picture_of_me = face_recognition.load_image_file(&quot;me.jpg&quot;)
-my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
+  
 
 # my_face_encoding now contains a universal 'encoding' of my facial features that can be compared to any other picture of a face!
 
