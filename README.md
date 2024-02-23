@@ -259,10 +259,7 @@ unknown_person</pre><div class="zeroclipboard-container">
 <span class="pl-s1">face_locations</span> <span class="pl-c1">=</span> <span class="pl-s1">face_recognition</span>.<span class="pl-en">face_locations</span>(<span class="pl-s1">image</span>, <span class="pl-s1">model</span><span class="pl-c1">=</span><span class="pl-s">"cnn"</span>)
 
 <span class="pl-c"># face_locations is now an array listing the co-ordinates of each face!</span></pre><div class="zeroclipboard-container">
-    ="Copy" class="ClipboardButton btn btn-invisible js-clipboard-copy m-2 p-0 tooltipped-no-delay d-flex flex-justify-center flex-items-center" data-copy-feedback="Copied!" <clipboard-copy aria-labeldata-tooltip-direction="w" value="import face_recognition
-
-image = face_recognition.load_image_file(&quot;my_picture.jpg&quot;)
-face_locations = face_recognition.face_locations(image, model=&quot;cnn&quot;)
+   
 
 # face_locations is now an array listing the co-ordinates of each face!" tabindex="0" role="button">
       <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" data-view-component="true" class="octicon octicon-copy js-clipboard-copy-icon">
